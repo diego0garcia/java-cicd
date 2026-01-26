@@ -1,0 +1,29 @@
+name: Java CI/CD con Gradle
+
+# 1. ¿Cuándo se activa? Cuando alguien sube código (push)
+on: [push]
+
+jobs:
+  build:
+    # El "ordenador" virtual que usará GitHub (un Linux actualizado)
+    runs-on: ubuntu-latest
+
+    steps:
+      # 2. Descarga tu código en el ordenador virtual
+      - name: Descargar código del repositorio
+        uses: actions/checkout@v4
+
+      # 3. Instala Java 21 (Temurin es la versión más estándar)
+      - name: Instalar Java 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+
+      # 4. Configura Gradle (esto prepara el entorno para ejecutar comandos gradle)
+      - name: Configurar Gradle
+        uses: gradle/actions/setup-gradle@v3
+
+      # 5. Ejecuta los tests e intenta compilar
+      - name: Ejecutar tests con Gradle
+        run: ./gradlew test
