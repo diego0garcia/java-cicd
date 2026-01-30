@@ -26,4 +26,6 @@ jobs:
 
       # 5. Ejecuta los tests e intenta compilar
       - name: Ejecutar tests con Gradle
-        run: ./gradlew test
+        run: |
+          chmod +x gradlew
+          ./gradlew test
